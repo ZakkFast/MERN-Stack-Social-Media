@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://zakk123:zakk123@devconnector.uxjjk.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://zakk123:zakk123@devconnector.uxjjk.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "superSecretToken"
 }
