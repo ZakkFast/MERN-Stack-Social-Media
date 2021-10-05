@@ -2,17 +2,18 @@ const express = require("express");
 const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
-const { check, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { check, validationResult } = require("express-validator/check");
 
 const User = require("../../models/User");
 
 // @route    POST api/users
-// @decs     Register user
+// @desc     Register user
 // @access   Public
 router.post(
   "/",
-  [
-    //Validation for name, email, and password
+  [ // Validate user info
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check(
@@ -23,38 +24,37 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() }); // Send bad request if error with json storin errors
+      return res.status(400).json({ errors: errors.array() });
     }
 
     const { name, email, password } = req.body;
 
     try {
-      // See if user exists
-      let user = await User.findOne({ email }); //find user by email
+      let user = await User.findOne({ email });
 
       if (user) {
-        //if there is already a user with that name send 400
-        res.status(400).json()({ errors: [{ msg: "User already exists!" }] });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "User already exists" }] });
       }
-      // Get users gravatar
+      // get gravatar
       const avatar = gravatar.url(email, {
-        s: "200", // size
-        r: "pg", //  rating
-        d: "mm", //   default if none found
+        s: "200",
+        r: "pg",
+        d: "mm",
       });
-
+      // create user
       user = new User({
         name,
         email,
         avatar,
         password,
       });
-
-      // Set salt
+      // encrypt password
       const salt = await bcrypt.genSalt(10);
-      // Encrypt password
+
       user.password = await bcrypt.hash(password, salt);
-      // Save user to db
+      // save user
       await user.save();
 
       // Return jsonwebtoken
