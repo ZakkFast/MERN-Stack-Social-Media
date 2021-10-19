@@ -10,7 +10,7 @@ import setAuthToken from './utils/setAuthToken.js';
 // Components
 import { Navbar } from './components/layout/Navbar';
 import { Landing } from './components/layout/Landing';
-import { Login } from './components/auth/Login';
+import Login from './components/auth/Login';
 import Register from './components/auth/Register.js';
 import Alert from './components/layout/Alert'
 

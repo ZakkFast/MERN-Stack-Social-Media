@@ -63,7 +63,6 @@ const Register = ({ setAlert, register }) => {
             name='password'
             value={password}
             onChange={(e) => onChange(e)}
-
           />
         </div>
         <div className='form-group'>
@@ -73,7 +72,6 @@ const Register = ({ setAlert, register }) => {
             name='password2'
             value={password2}
             onChange={(e) => onChange(e)}
- 
           />
         </div>
         <input type='submit' className='btn btn-primary' value='Register' />
@@ -86,7 +84,7 @@ const Register = ({ setAlert, register }) => {
 };
 
 Register.propTypes = {
-  setAlrt: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
 };
 
