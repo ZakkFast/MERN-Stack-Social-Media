@@ -1,7 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://zakk123:zakk123@devconnector.uxjjk.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "superSecretToken",
-    "githubClientId": "b4e96262050455f83fa5",
-    "githubSecret": "260abd5dcc8b28be3e0ac2741479f77b5060479f"
-  }
-  
